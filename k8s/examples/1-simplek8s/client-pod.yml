@@ -1,0 +1,14 @@
+# In practice Pod are rarely used directly, see Deployment config
+# instead.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  labels:
+    component: web
+spec:
+  containers:
+    - name: client
+      image: stephengrider/multi-worker
+      ports:
+        - containerPort: 3000

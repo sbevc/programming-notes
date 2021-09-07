@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  # If we want a cluster of pg containers, we MUST NOT just increase the number of replicas.
+  # We have to add additional configuration to set up the cluster.
+  replicas: 1
+  selector:
+    matchLabels:
+      component: postgres
+  template:
+    metadata:
+      labels:
+        component: postgres
+    spec:
+      # Allocate a persistent volume defined in the claim
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          # Ask the container to use one of the allocated volumes
+          volumeMounts:
+            - name: postgres-storage  # Refer to the allocated volume
+              mountPath: /var/lib/postgresql/data
+              # inside the Volume, store postgres data in a 'postgres' directory.
+              # Don't know why, but use this to make postgres volume work.
+              subPath: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: PGPASSWORD
+                  name: pgpassword

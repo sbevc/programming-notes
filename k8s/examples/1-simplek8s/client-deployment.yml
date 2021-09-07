@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+  replicas: 1  # Number of pods
+
+  # We have to specify a selector for the deployment to get a reference to the
+  # created pods for future updates. Below in template -> metadata -> labels we
+  # added the label 'component: web' that we are matching here.
+  selector:
+    matchLabels:
+      component: web
+
+  # Define configuration for the set of pods handled by this deployment config.
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: stephengrider/multi-client
+          ports:
+            - containerPort: 3000
