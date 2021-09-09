@@ -58,7 +58,7 @@ a pod will run a single container though. An example of when running
 a set of containers inside the same pod; the logger and backup-manager
 containers wouldn't make sense without the postgres container
 
-![hello](img/diagrams-14%20-%20why.drawio.png)
+![multi-container-pod](img/diagrams-14%20-%20why.drawio.png)
 
 Example definition in `client-pod.yml` file
 ```yaml
@@ -389,3 +389,18 @@ env:
 ### Dashboard
 See https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/15492160#questions
 
+### Deployment
+For an example of deployment using google cloud and travis-ci, look to
+[deployment](examples/2-complex/deploy.sh) and [travis](examples/2-complex/.travis.yml) files. 
+
+In particular:
+1. Images are tagged with `git rev-parse HEAD` in order to easily apply the latest changes
+to the cluster
+2. Images are also tagged with :latest for ease of development
+
+
+#### RBAC (Role Based Access Control)
+
+![rbac](img/diagrams-17-rbac.png)
+
+To manage control
