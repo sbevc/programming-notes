@@ -58,7 +58,7 @@ a pod will run a single container though. An example of when running
 a set of containers inside the same pod; the logger and backup-manager
 containers wouldn't make sense without the postgres container
 
-![multi-container-pod](img/diagrams-14%20-%20why.drawio.png)
+![multi-container-pod](../img/diagrams-14%20-%20why.drawio.png)
 
 Example definition in `client-pod.yml` file
 ```yaml
@@ -401,6 +401,6 @@ to the cluster
 
 #### RBAC (Role Based Access Control)
 
-![rbac](img/diagrams-17-rbac.png)
+![rbac](../img/diagrams-17-rbac.png)
 
 To manage control

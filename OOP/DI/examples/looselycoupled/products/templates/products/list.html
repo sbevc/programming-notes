@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Featured products</title>
+</head>
+<body>
+
+<h2>Featured Products</h2>
+{% for prod in products_view_model.products %}
+    <div>{{ prod.summary_text }}</div>
+{% endfor %}
+
+</body>
+</html>
